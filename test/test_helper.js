@@ -1,12 +1,33 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+// //before() callback done
+// before((done)=>{
+//     mongoose.connect('mongodb://localhost/users_test',{useMongoClient: true});//tell mongoose to connect to Mongo
+//     mongoose.connection
+//     .once('open', () => {
+//         console.log('Good to go');
+//         done();
+//     })//mot khi ket noi dc db
+//     .on('error', (err) => { //neu gap loi thi log ra.
+//         console.warn('Warning', err);
+//     });
+//     });
+
+//before() async-await
+before(async()=>{
 mongoose.connect('mongodb://localhost/users_test',{useMongoClient: true});//tell mongoose to connect to Mongo
-mongoose.connection
-.once('open', () => console.log('Good to go'))//mot khi ket noi dc db
+await mongoose.connection
+.once('open', () => {
+    console.log('Good to go');
+    
+})//mot khi ket noi dc db
 .on('error', (err) => { //neu gap loi thi log ra.
     console.warn('Warning', err);
 });
+});
+
+//Khac biet giua before() va beforeEach la before() chi chay 1 lan, con beforeEach chay nhieu lan
 
 //trc khi chay dc npm run test thi fai chinh trong file package.json trc
 //kiem trong phan:
