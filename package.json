@@ -1,10 +1,9 @@
 {
   "name": "Test-Driven",
   "version": "1.0.0",
-  "description": "",
   "main": "test.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nodemon --exec 'mocha -R min'"
   },
   "repository": {
     "type": "git",
@@ -21,5 +20,10 @@
     "mocha": "^4.0.1",
     "mongoose": "^4.12.0",
     "nodemon": "^1.12.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "description": ""
 }

@@ -15,17 +15,29 @@ mongoose.Promise = global.Promise;
 //     });
 
 //before() async-await
-before(async()=>{
+// before(async()=>{
+// mongoose.connect('mongodb://localhost/users_test',{useMongoClient: true});//tell mongoose to connect to Mongo
+// //mongoose.connection
+// await mongoose.connection
+//   .once('open', () => {
+//     console.log('Connected DB. Good to go');  
+//   })//mot khi ket noi dc db
+
+//   .on('error', (err) => { //neu gap loi thi log ra.
+//     console.warn('Warning', err);
+//   });
+// });
+
 mongoose.connect('mongodb://localhost/users_test',{useMongoClient: true});//tell mongoose to connect to Mongo
-await mongoose.connection
-.once('open', () => {
-    console.log('Good to go');
+    //mongoose.connection
+mongoose.connection
+  .once('open', () => {
+    console.log('Connected DB. Good to go');  
+  })//mot khi ket noi dc db
     
-})//mot khi ket noi dc db
-.on('error', (err) => { //neu gap loi thi log ra.
+  .on('error', (err) => { //neu gap loi thi log ra.
     console.warn('Warning', err);
-});
-});
+  });
 
 //Khac biet giua before() va beforeEach la before() chi chay 1 lan, con beforeEach chay nhieu lan
 
@@ -39,6 +51,12 @@ await mongoose.connection
 // "scripts": {
 //     "test": "mocha"
 //   },
+
+//hoac sua thanh:
+// "scripts": {
+//     "test": "nodemon --exec 'mocha -R min'" // -R min co nghia la clear screen doan code trc
+//   },
+
 /////////////////
 
 //trc moi lan chay test thi su dung beforeEach() bat dong bo
