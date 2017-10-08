@@ -20,7 +20,15 @@ describe('Reading users out of the database',()=>{
              console.log(ThienAn._id);
              console.log(users);
              //kiem tra fan tu user dau tien
-             assert(users[0]._id.toString() === ThienAn._id.toString());
+             //assert(users[0]._id.toString() === ThienAn._id.toString());
          })
     });
+
+    it('Find a user with a particular id', async()=>{
+        await User.findOne({_id: ThienAn._id})
+         .then((user)=>{
+            assert(user.name==='ThienAn');
+         });
+    });
 });
+

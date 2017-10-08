@@ -30,5 +30,3 @@ describe('Creating records', ()=>{
     });
 
 });
-
-//video 29
