@@ -6,7 +6,7 @@ describe('Updating records', ()=>{
     let LeThien;
 
     beforeEach(async()=>{
-        LeThien = new User({name: 'LeThien'});
+        LeThien = new User({name: 'LeThien', postCount: 0});
         await LeThien.save();
     });
 
@@ -51,4 +51,14 @@ describe('Updating records', ()=>{
             User.findByIdAndUpdate(LeThien._id,{name: 'LeThienA'})
             ,done);
     });
+
+    //test tang gia tri postCount len 1 chu ko fai gan gia tri la 1
+    it('A user can have their postcount incremented by 1',async()=>{
+        
+        //$inc la co dinh de tang/giam 1 thuoc tinh nao do
+        await User.update({name:'LeThien'}, { $inc: {postCount: 2}})
+         .then(()=> User.findOne({name: 'LeThien'}))
+         .then((userLeThien)=> assert(userLeThien.postCount === 2));
+    });
+        
 });
