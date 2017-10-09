@@ -3,16 +3,20 @@ const User = require('../src/user');
 
 describe('Deleting a user', ()=>{
 
-    beforeEach(async()=>{
+    beforeEach((done)=>{
         Le = new User({name: 'Le'});
-        await Le.save();
+        Le.save();
+        done();
     });
 
     //cach 1:
-    it('model instance remove', async()=>{
-        await Le.remove()
+    it('model instance remove', (done)=>{
+         Le.remove()
          .then(()=> User.findOne({name: 'Le'}))
-         .then((userC1)=> assert(userC1 === null));
+         .then((userC1)=> {
+             assert(userC1 === null);
+             done();
+        });
     });
 
     //cach 2:

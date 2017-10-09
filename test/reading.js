@@ -5,20 +5,19 @@ describe('Reading users out of the database',()=>{
     let ThienAn;// khai bao bien nay de luu thong tin user de so sanh sau trog it
 
 //beforeEach() nay dung de tao 1 user ThienAn trc moi khi test
-    beforeEach(async()=>{
+    beforeEach((done)=>{
         ThienAn = new User({name: 'ThienAn'});
-        await ThienAn.save()
-         .then(()=>{
-             console.log('Reading test');
-         })
+        ThienAn.save()
+         .then(()=> done());
     });
 
-    it('Find & read all users with name ThienAn', async()=>{
-        await User.find({name: 'ThienAn'})
+    it('Find & read all users with name ThienAn', (done)=>{
+        User.find({name: 'ThienAn'})
          .then((users)=>{
-             console.log(users[0]._id);
-             console.log(ThienAn._id);
+             //console.log(users[0]._id);
+             //console.log(ThienAn._id);
              console.log(users);
+             done();
              //kiem tra fan tu user dau tien
              //assert(users[0]._id.toString() === ThienAn._id.toString());
          })
