@@ -36,15 +36,19 @@ describe('Updating records', ()=>{
         assertName(LeThien.update({name: 'LeThienA'}),done);
     });
 
-    // it('instance set n save',async()=>{
-        
-    // });
+    it('A model class can update',(done)=>{
+      assertName(
+        User.update({name: 'LeThien'}, {name: 'LeThienA'}),done);
+    });
 
-    // it('instance set n save',async()=>{
-        
-    // });
+    it('A model class can update one record',(done)=>{
+        assertName(
+            User.findOneAndUpdate({name: 'LeThien'}, {name: 'LeThienA'}),done);
+    });
 
-    // it('instance set n save',async()=>{
-        
-    // });
+    it('A model class can  find a record with and Id and update',(done)=>{
+        assertName(
+            User.findByIdAndUpdate(LeThien._id,{name: 'LeThienA'})
+            ,done);
+    });
 });
