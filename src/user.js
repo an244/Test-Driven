@@ -6,7 +6,7 @@ const UserSchema = new Schema({
     name: { 
         type: String,
         validate: {
-            //ham co san
+            //ham co san validator()
             validator: (name) => name.length > 2,
             
             //message muon show
