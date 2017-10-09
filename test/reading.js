@@ -11,22 +11,24 @@ describe('Reading users out of the database',()=>{
          .then(()=> done());
     });
 
-    it('Find & read all users with name ThienAn', (done)=>{
+    it('Find & read all users with name of ThienAn', (done)=>{
         User.find({name: 'ThienAn'})
          .then((users)=>{
              //console.log(users[0]._id);
              //console.log(ThienAn._id);
              console.log(users);
-             done();
+
              //kiem tra fan tu user dau tien
-             //assert(users[0]._id.toString() === ThienAn._id.toString());
-         })
+             assert(users[0]._id.toString() === ThienAn._id.toString());
+             done();
+            });
     });
 
-    it('Find a user with a particular id', async()=>{
-        await User.findOne({_id: ThienAn._id})
+    it('Find a user with a particular id', (done)=>{
+        User.findOne({_id: ThienAn._id})
          .then((user)=>{
-            assert(user.name==='ThienAn');
+            assert(user.name ==='ThienAn');
+            done();
          });
     });
 });

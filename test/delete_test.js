@@ -3,16 +3,18 @@ const User = require('../src/user');
 
 describe('Deleting a user', ()=>{
 
+    let LeT;
+
     beforeEach((done)=>{
-        Le = new User({name: 'Le'});
-        Le.save();
-        done();
+        LeT = new User({name: 'LeT'});
+        LeT.save()
+         .then(() => done());
     });
 
     //cach 1:
     it('model instance remove', (done)=>{
-         Le.remove()
-         .then(()=> User.findOne({name: 'Le'}))
+         LeT.remove()
+         .then(()=> User.findOne({name: 'LeT'}))
          .then((userC1)=> {
              assert(userC1 === null);
              done();
@@ -20,24 +22,33 @@ describe('Deleting a user', ()=>{
     });
 
     //cach 2:
-    it('class method remove', async()=>{
+    it('class method remove', (done)=>{
     //remove a bunch of records with some given criteria
-    await User.remove({name: 'Le'})
-     .then(()=> User.findOne({name: 'Le'}))
-     .then((userC2)=> assert(userC2 === null));
+    User.remove({name: 'LeT'})
+     .then(()=> User.findOne({name: 'LeT'}))
+     .then((userC2)=> {
+         assert(userC2 === null);
+         done();
+        });
     });
 
     //cach 3:
-    it('class method findOneAndRemove', async()=>{
-        await User.findOneAndRemove({name: 'Le'})
-        .then(()=> User.findOne({name: 'Le'}))
-        .then((userC3)=> assert(userC3 === null));   
+    it('class method findOneAndRemove', (done)=>{
+       User.findOneAndRemove({name: 'LeT'})
+        .then(()=> User.findOne({name: 'LeT'}))
+        .then((userC3)=> {
+            assert(userC3 === null);
+            done();
+        });   
     });
 
     //cach 4:
-    it('class method findbyIdAndRemove', async()=>{
-        await User.findByIdAndRemove(Le._id)
-        .then(()=> User.findOne({name: 'Le'}))
-        .then((userC4)=> assert(userC4 === null));  
+    it('class method findbyIdAndRemove', (done)=>{
+        User.findByIdAndRemove(LeT._id)
+        .then(()=> User.findOne({name: 'LeT'}))
+        .then((userC4)=> {
+            assert(userC4 === null);
+            done();
+        });  
     });
 });
